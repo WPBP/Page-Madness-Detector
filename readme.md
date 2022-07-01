@@ -8,6 +8,12 @@ This library is a way to create a wrapper that let's the developer to detect if 
 
 ## Detect
 
+### Plugins
+
 * Elementor
 * Elementor Pro
 * WP Bakery
+
+### Themes (that include those solutions)
+
+* Divi

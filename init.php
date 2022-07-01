@@ -16,6 +16,10 @@ class Page_Madness_Detector {
         'js_composer' => array( $this, 'wpbakery' ),
     );
 
+    private $themes_slug = array(
+        'divi' => array( $this, 'divi' ),
+    );
+
     /**
      * Load all the plugins definition
      */
@@ -26,13 +30,19 @@ class Page_Madness_Detector {
     /**
      * Detect if that page builder is active
      *
-     * @param string $plugin_slug The plugin slug/textdomain
+     * @param string $slug The plugin/theme slug/textdomain
      * @return bool
      */
-    public function detect( $plugin_slug ) {
-        if ( isset( $this->plugins_slug[ $plugin_slug ] ) ) {
-            return \call_user_func_array( $this->plugins_slug[ $plugin_slug ][0], $this->plugins_slug[ $plugin_slug ][1] );
+    public function detect( $slug ) {
+        if ( isset( $this->plugins_slug[ $slug ] ) ) {
+            return \call_user_func_array( $this->plugins_slug[ $slug ][0], $this->plugins_slug[ $slug ][1] );
         }
+
+        if ( isset( $this->themes_slug[ $slug ] ) ) {
+            return \call_user_func_array( $this->themes_slug[ $slug ][0], $this->themes_slug[ $slug ][1] );
+        }
+
+        return false;
     }
 
     /**
@@ -43,6 +53,12 @@ class Page_Madness_Detector {
     public function has_entrophy() {
         foreach( $this->plugins_slug as $plugin ) {
             if ( \call_user_func_array( $this->plugins_slug[ $plugin ][0], $this->plugins_slug[ $plugin ][1] ) ) {
+                return true;
+            }
+        }
+
+        foreach( $this->themes_slug as $theme ) {
+            if ( \call_user_func_array( $this->themes_slug[ $theme ][0], $this->themes_slug[ $theme ][1] ) ) {
                 return true;
             }
         }
@@ -77,4 +93,12 @@ class Page_Madness_Detector {
         return \defined( 'WPB_VC_VERSION' );
     }
 
+    /**
+     * Detect if Divi
+     *
+     * @return bool
+     */
+    public static function divi() {
+        return \function_exists( 'et_setup_theme' );
+    }
 }
