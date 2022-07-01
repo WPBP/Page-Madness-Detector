@@ -14,6 +14,10 @@ class Page_Madness_Detector {
         'elementor' => array( $this, 'elementor' ),
         'elementor-pro' => array( $this, 'elementor_pro' ),
         'js_composer' => array( $this, 'wpbakery' ),
+        'siteorigin' => array( $this, 'siteorigin' ),
+        'fl-builder' => array( $this, 'beaverbuilder_lite' ),
+        'fusion' => array( $this, 'fusion' ),
+        'oxygen' => array( $this, 'oxygen' ),
     );
 
     private $themes_slug = array(
@@ -21,10 +25,11 @@ class Page_Madness_Detector {
     );
 
     /**
-     * Load all the plugins definition
+     * Filters to customize plugins/themes
      */
     public function __construct() {
         $this->plugins_slug = \apply_filters( 'page_madness_detector_add_plugin_detection', $this->plugins_slug );
+        $this->themes_slug  = \apply_filters( 'page_madness_detector_add_theme_detection', $this->themes_slug );
     }
 
     /**
@@ -91,6 +96,42 @@ class Page_Madness_Detector {
      */
     public static function wpbakery() {
         return \defined( 'WPB_VC_VERSION' );
+    }
+
+    /**
+     * Detect if Page Builder by Siteorigin
+     *
+     * @return bool
+     */
+    public static function siteorigin() {
+        return \defined( 'SITEORIGIN_PANELS_VERSION' );
+    }
+
+    /**
+     * Detect if Beaver Builder
+     *
+     * @return bool
+     */
+    public static function beaverbuilder_lite() {
+        return \class_exists( 'FLBuilderLoader' );
+    }
+
+    /**
+     * Detect if Fusion Page Builder
+     *
+     * @return bool
+     */
+    public static function fusion() {
+        return \defined( 'FSN_VERSION' );
+    }
+
+    /**
+     * Detect if Oxygen Builder
+     *
+     * @return bool
+     */
+    public static function oxygen() {
+        return \defined( 'CT_VERSION' );
     }
 
     /**
