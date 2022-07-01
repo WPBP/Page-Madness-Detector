@@ -29,16 +29,16 @@ class Page_Madness_Detector {
      */
     public function __construct() {
         $this->plugins_slug = array(
-            'elementor'     => array( $this, 'elementor' ),
-            'elementor-pro' => array( $this, 'elementor_pro' ),
-            'js_composer'   => array( $this, 'wpbakery' ),
-            'siteorigin'    => array( $this, 'siteorigin' ),
-            'fl-builder'    => array( $this, 'beaverbuilder_lite' ),
-            'fusion'        => array( $this, 'fusion' ),
-            'oxygen'        => array( $this, 'oxygen' ),
+            'elementor'     => 'elementor',
+            'elementor-pro' => 'elementor_pro',
+            'js_composer'   => 'wpbakery',
+            'siteorigin'    => 'siteorigin',
+            'fl-builder'    => 'beaverbuilder_lite',
+            'fusion'        => 'fusion',
+            'oxygen'        => 'oxygen',
         );
         $this->themes_slug = array(
-            'divi' => array( $this, 'divi' ),
+            'divi' => 'divi',
         );
         $this->plugins_slug = \apply_filters( 'page_madness_detector_add_plugin_detection', $this->plugins_slug );
         $this->themes_slug  = \apply_filters( 'page_madness_detector_add_theme_detection', $this->themes_slug );
@@ -69,14 +69,13 @@ class Page_Madness_Detector {
      */
     public function has_entrophy() {
         foreach( $this->plugins_slug as $plugin ) {
-            print_r($plugin);
-            if ( \call_user_func( $this->plugins_slug[ $plugin ] ) ) {
+            if ( \call_user_func( array( $this, $plugin ) ) ) {
                 return true;
             }
         }
 
         foreach( $this->themes_slug as $theme ) {
-            if ( \call_user_func( $this->themes_slug[ $theme ] ) ) {
+            if ( \call_user_func( array( $this, $theme ) ) ) {
                 return true;
             }
         }
