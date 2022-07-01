@@ -38,7 +38,7 @@ class Page_Madness_Detector {
             'oxygen'        => array( 'detect' => 'oxygen', 'version' => 'oxygen_version' ),
         );
         $this->themes_slug = array(
-            'divi' => 'divi',
+            'divi' => array( 'detect' => 'divi', 'version' => 'divi_version' ),
         );
         $this->plugins_slug = \apply_filters( 'page_madness_detector_add_plugin_detection', $this->plugins_slug );
         $this->themes_slug  = \apply_filters( 'page_madness_detector_add_theme_detection', $this->themes_slug );
