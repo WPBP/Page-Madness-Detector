@@ -1,6 +1,6 @@
 {
   "name": "wpbp/page-madness-detector",
-  "description": "",
+  "description": "A WordPress library to detect if the website is using a pagebuilder/visual builder",
   "license": "GPL-3.0",
   "keywords": [
     "wordpress",

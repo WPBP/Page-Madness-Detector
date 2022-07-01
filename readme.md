@@ -24,12 +24,13 @@ This library is a way to create a wrapper that let's the developer to detect if 
 
 ## Examples
 
-```
+```php
 <?php
-if ( new Page_Madness_Detector()->detect('elementor') || new Page_Madness_Detector()->detect('elementor-pro') ) {
+$builder = new Page_Madness_Detector();
+if ( $builder->detect('elementor') || $builder->detect('elementor-pro') ) {
     echo 'Elementor';
 }
 
 // If any plugin or theme is active detected by the library
-Page_Madness_Detector()->has_entrophy();
+$builder->has_entrophy();
 ```
