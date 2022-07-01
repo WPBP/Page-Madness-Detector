@@ -4,7 +4,7 @@
  * Detect if the website is using a page builder/visual builder
  *
  * @author    Mte90 <mte90net@gmail.com>
- * @license   GPL-2.0+
+ * @license   GPL-3.0+
  * @copyright 2022
  *
  */
