@@ -30,8 +30,10 @@ if ( $builder->detect('elementor') || $builder->detect('elementor-pro') ) {
     echo 'Elementor';
 }
 
-// If any plugin or theme is active detected by the library
+// Boolean value if a plugin/theme of that list is detect
 $builder->has_entrophy();
+
+$builder->version('elementor');
 
 // Filters
 add_filter( 'page_madness_detector_add_plugin_detection', fuction( $plugins ) {

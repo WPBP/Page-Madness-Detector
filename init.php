@@ -29,13 +29,13 @@ class Page_Madness_Detector {
      */
     public function __construct() {
         $this->plugins_slug = array(
-            'elementor'     => 'elementor',
-            'elementor-pro' => 'elementor_pro',
-            'js_composer'   => 'wpbakery',
-            'siteorigin'    => 'siteorigin',
-            'fl-builder'    => 'beaverbuilder_lite',
-            'fusion'        => 'fusion',
-            'oxygen'        => 'oxygen',
+            'elementor'     => array( 'detect' => 'elementor', 'version' => 'elementor_version' ),
+            'elementor-pro' => array( 'detect' => 'elementor_pro', 'version' => 'elementor_pro_version' ),
+            'js_composer'   => array( 'detect' => 'wpbakery', 'version' => 'wpbakery_version' ),
+            'siteorigin'    => array( 'detect' => 'siteorigin', 'version' => 'siteorigin_version' ),
+            'fl-builder'    => array( 'detect' => 'beaverbuilder_lite', 'version' => 'beaverbuilder_lite_version' ),
+            'fusion'        => array( 'detect' => 'fusion', 'version' => 'fusion_version' ),
+            'oxygen'        => array( 'detect' => 'oxygen', 'version' => 'oxygen_version' ),
         );
         $this->themes_slug = array(
             'divi' => 'divi',
@@ -52,11 +52,29 @@ class Page_Madness_Detector {
      */
     public function detect( $slug ) {
         if ( isset( $this->plugins_slug[ $slug ] ) ) {
-            return \call_user_func( $this->plugins_slug[ $slug ] );
+            return \call_user_func( $this->plugins_slug[ $slug ]['detect'] );
         }
 
         if ( isset( $this->themes_slug[ $slug ] ) ) {
-            return \call_user_func( $this->themes_slug[ $slug ] );
+            return \call_user_func( $this->themes_slug[ $slug ]['detect'] );
+        }
+
+        return false;
+    }
+
+    /**
+     * Return the page builder version if found
+     *
+     * @param string $slug The plugin/theme slug/textdomain
+     * @return string|bool
+     */
+    public function version( $slug ) {
+        if ( isset( $this->plugins_slug[ $slug ] ) ) {
+            return \call_user_func( $this->plugins_slug[ $slug ]['version'] );
+        }
+
+        if ( isset( $this->themes_slug[ $slug ] ) ) {
+            return \call_user_func( $this->themes_slug[ $slug ]['version'] );
         }
 
         return false;
@@ -69,13 +87,13 @@ class Page_Madness_Detector {
      */
     public function has_entrophy() {
         foreach( $this->plugins_slug as $plugin ) {
-            if ( \call_user_func( array( $this, $plugin ) ) ) {
+            if ( \call_user_func( array( $this, $plugin['detect'] ) ) ) {
                 return true;
             }
         }
 
         foreach( $this->themes_slug as $theme ) {
-            if ( \call_user_func( array( $this, $theme ) ) ) {
+            if ( \call_user_func( array( $this, $theme['detect'] ) ) ) {
                 return true;
             }
         }
@@ -93,12 +111,30 @@ class Page_Madness_Detector {
     }
 
     /**
+     * Return Elementor Free version
+     *
+     * @return string
+     */
+    public static function elementor_version() {
+        return \defined( 'ELEMENTOR_VERSION' ) && \ELEMENTOR_VERSION;
+    }
+
+    /**
      * Detect if Elementor Pro
      *
      * @return bool
      */
     public static function elementor_pro() {
         return \defined( 'ELEMENTOR_PRO_VERSION' );
+    }
+
+    /**
+     * Return Elementor Pro version
+     *
+     * @return string
+     */
+    public static function elementor_pro_version() {
+        return \defined( 'ELEMENTOR_PRO_VERSION' ) && \ELEMENTOR_PRO_VERSION;
     }
 
     /**
@@ -111,6 +147,15 @@ class Page_Madness_Detector {
     }
 
     /**
+     * Return WPBakery version
+     *
+     * @return string
+     */
+    public static function wpbakery_version() {
+        return \defined( 'WPB_VC_VERSION' ) && \WPB_VC_VERSION;
+    }
+
+    /**
      * Detect if Page Builder by Siteorigin
      *
      * @return bool
@@ -120,12 +165,30 @@ class Page_Madness_Detector {
     }
 
     /**
+     * Return Page Builder by Siteorigin version
+     *
+     * @return string
+     */
+    public static function siteorigin_version() {
+        return \defined( 'SITEORIGIN_PANELS_VERSION' ) && \SITEORIGIN_PANELS_VERSION;
+    }
+
+    /**
      * Detect if Beaver Builder
      *
      * @return bool
      */
     public static function beaverbuilder_lite() {
-        return \class_exists( 'FLBuilderLoader' );
+        return \defined( 'FL_BUILDER_VERSION' );
+    }
+
+    /**
+     * Return Beaver Builder version
+     *
+     * @return string
+     */
+    public static function beaverbuilder_lite_version() {
+        return \defined( 'FL_BUILDER_VERSION' ) && \FL_BUILDER_VERSION;
     }
 
     /**
@@ -138,6 +201,15 @@ class Page_Madness_Detector {
     }
 
     /**
+     * Return Fusion Page Builder version
+     *
+     * @return string
+     */
+    public static function fusion_version() {
+        return \defined( 'FSN_VERSION' ) && \FSN_VERSION;
+    }
+
+    /**
      * Detect if Oxygen Builder
      *
      * @return bool
@@ -147,11 +219,29 @@ class Page_Madness_Detector {
     }
 
     /**
+     * Return Oxygen Builder version
+     *
+     * @return string
+     */
+    public static function oxygen_version() {
+        return \defined( 'CT_VERSION' ) && \CT_VERSION;
+    }
+
+    /**
      * Detect if Divi
      *
      * @return bool
      */
     public static function divi() {
         return \function_exists( 'et_setup_theme' );
+    }
+
+    /**
+     * Return Divi version
+     *
+     * @return string
+     */
+    public static function divi_version() {
+        return \function_exists( 'et_setup_theme' ) && \et_get_theme_version();
     }
 }
