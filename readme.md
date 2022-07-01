@@ -1,7 +1,7 @@
 # Page Madness Detector
 
-The library name is just an information for something that *WordPress developers know*.
-Page Builder/Visual Composer create a huge entrophy with the various features that they offers with difference by versions.
+The library name is just an information for something that *WordPress developers know*.  
+Page Builder/Visual Composer create a huge entrophy with the various features that they offers with difference by versions.  
 This library is a way to create a wrapper that let's the developer to detect if they are used in the website.
 
 ## Detect list
@@ -32,7 +32,7 @@ if ( $builder->detect('elementor') || $builder->detect('elementor-pro') ) {
 
 // Boolean value if a plugin/theme of that list is detect
 $builder->has_entrophy();
-
+// String if a version number is available or false if not detected
 $builder->version('elementor');
 
 // Filters
