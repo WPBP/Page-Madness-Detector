@@ -1,0 +1,30 @@
+{
+  "name": "wpbp/page-madness-detector",
+  "description": "",
+  "license": "GPL-3.0",
+  "keywords": [
+    "wordpress",
+    "visual builder"
+  ],
+  "homepage": "https://github.com/WPBP/Page-Madness-Detector",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Daniele Scasciafratte",
+      "email": "mte90net@gmail.com",
+      "homepage": "https://daniele.tech"
+    }
+  ],
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/WPBP/Page-Madness-Detector.git"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "init.php"
+    ]
+  }
+}
