@@ -36,6 +36,7 @@ class Page_Madness_Detector {
             'fl-builder'    => array( 'detect' => 'beaverbuilder_lite', 'version' => 'beaverbuilder_lite_version' ),
             'fusion'        => array( 'detect' => 'fusion', 'version' => 'fusion_version' ),
             'oxygen'        => array( 'detect' => 'oxygen', 'version' => 'oxygen_version' ),
+            'bricks'        => array( 'detect' => 'bricks', 'version' => 'bricks_version' ),
         );
         $this->themes_slug = array(
             'divi' => array( 'detect' => 'divi', 'version' => 'divi_version' ),
@@ -243,5 +244,23 @@ class Page_Madness_Detector {
      */
     public static function divi_version() {
         return \function_exists( 'et_setup_theme' ) && \et_get_theme_version();
+    }
+
+    /**
+     * Detect if Bricks
+     *
+     * @return bool
+     */
+    public static function bricks() {
+        return \defined( 'BRICKS_VERSION' );
+    }
+
+    /**
+     * Return Bricks version
+     *
+     * @return string
+     */
+    public static function bricks_version() {
+        return \defined( 'BRICKS_VERSION' ) && \BRICKS_VERSION;
     }
 }

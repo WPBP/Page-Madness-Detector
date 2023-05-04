@@ -1,7 +1,7 @@
 # Page Madness Detector
 
 The library name is just an information for something that *WordPress developers know*.  
-Page Builder/Visual Composer create a huge entrophy with the various features that they offers with difference by versions.  
+Page Builders/Visual Composers create a huge entropy with the various features that they offers with difference by versions.  
 This library is a way to create a wrapper that let's the developer to detect if they are used in the website.
 
 ## Detect list
@@ -15,6 +15,7 @@ This library is a way to create a wrapper that let's the developer to detect if 
 * Beaver Builder Lite
 * Fusion Page Builder
 * Oxygen Builder
+* Bricks Builder (it is a theme with child but use a constant)
 
 ### Themes (that include those solutions)
 
