@@ -86,7 +86,7 @@ class Page_Madness_Detector {
      *
      * @return bool
      */
-    public function has_entrophy() {
+    public function has_entropy() {
         foreach( $this->plugins_slug as $plugin ) {
             if ( \call_user_func( array( $this, $plugin['detect'] ) ) ) {
                 return true;

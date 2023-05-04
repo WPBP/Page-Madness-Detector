@@ -32,7 +32,7 @@ if ( $builder->detect('elementor') || $builder->detect('elementor-pro') ) {
 }
 
 // Boolean value if a plugin/theme of that list is detect
-$builder->has_entrophy();
+$builder->has_entropy();
 // String if a version number is available or false if not detected
 $builder->version('elementor');
 
